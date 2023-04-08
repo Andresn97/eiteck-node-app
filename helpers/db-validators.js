@@ -27,8 +27,8 @@ const isEmailValid = async (email = '') => {
 //   ); 
 // }
 
-const existsUserById = async( id ) => {
-
+const existsUserById = async ( id ) => {
+console.log('entros');
   const currentUser = await User.findById(id);
   if ( !currentUser ) {
     throw new Error(`El id no existe ${ id }`);

@@ -5,6 +5,7 @@ const {
   fieldValidate,
   validateJWT,
   isAdminRole,
+  isTheSameRole,
 } = require('../middlewares');
 const { 
   isRoleValid, 
@@ -20,19 +21,24 @@ const {
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get(
+  '/', 
+  [ validateJWT, isAdminRole ], 
+  getUsers
+);
 
 router.put('/:id', [
+  validateJWT,
+  isTheSameRole,
   check('id', 'No es un ID válido').isMongoId(),
   check('id').custom( existsUserById ),
   check('role').custom( isRoleValid ), 
-  fieldValidate
-],updateUser );
+  fieldValidate,
+], updateUser );
 
 router.delete('/:id', [
   validateJWT,
   isAdminRole,
-  // hasRole('ADMIN_ROLE, USER_ROLE'),
   check('id', 'No es un ID válido').isMongoId(),
   check('id').custom( existsUserById ),
   fieldValidate

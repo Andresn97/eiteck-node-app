@@ -23,7 +23,7 @@ const createUser = async ( req, res = response ) => {
     console.log(error);
     return res.status(500).json({
       ok: false,
-      msg: 'Por favor hable con el administrador',
+      msg: 'Por favor hable con el administrador [User]',
     });
   }
 
@@ -80,7 +80,6 @@ const loginUser = async ( req, res = response ) => {
 
 const reloadToken = async ( req, res ) => {
 
-  console.log(req.user);
   const { id, name } = req.user;
 
   const token = await generateJWT( id, name );

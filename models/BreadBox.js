@@ -8,7 +8,7 @@ const BreadBoxSchema = Schema({
     require: [ true, 'El nombre de la caja es obligatorio.' ]
   },
   price: {
-    type: String,
+    type: Schema.Types.Decimal128,
     require: [ true, 'El precio de la caja es obligatorio.' ]
   },
   total_units: {
@@ -32,5 +32,10 @@ const BreadBoxSchema = Schema({
     default: Date.now
   },
 });
+
+BreadBoxSchema.methods.toJSON = function() {
+  const { __v, ...box } = this.toObject();
+  return box;
+}
 
 module.exports = model( 'BreadBox', BreadBoxSchema );
