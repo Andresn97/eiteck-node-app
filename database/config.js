@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const dbConnection = async () => {
   try {
-    
+    console.log(process.env.DB_CT );
     await mongoose.connect( process.env.DB_CT );
     console.log('DB ONLINE');
 
