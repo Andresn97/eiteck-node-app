@@ -31,6 +31,6 @@ app.use('/api/order', require('./routes/order'));
 app.use('/api/shipment', require('./routes/shipment'));
 
 //Configuración del Puerto
-app.listen( process.env.PORT, () => {
+app.listen( process.env.PORT || 4000, () => {
   console.log(`Servidor corriendo en puerto ${ process.env.PORT }`);
 });
